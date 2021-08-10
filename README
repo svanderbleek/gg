@@ -28,3 +28,8 @@ Supporting multiple concurrent games would be logical but isn’t strictly requi
 Deliverables
 
 Send us a tarball containing your code and a README with directions on how to build and run your guessing game. If you include tests, we will give those a try too. Add a Dockerfile if that would make it easier to build and run your game.
+
+Directions
+
+
+
