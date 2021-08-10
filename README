@@ -1,0 +1,30 @@
+Guessing Game Take-Home Problem
+
+This is a take-home project for candidates. It should be doable in 1-3 hours of work.
+
+Problem
+
+Implement a distributed number guessing game. The guessing game is played by a human, talking to a game server. There should be two components: a client and a server. The client and server communicate with one another over HTTP. The client has the following operations:
+
+* Start a new game
+* Ask a question
+* Guess an answer
+
+When the client sends “start a new game”, the server picks a “solution” for the new game. For example, a solution might be “42”. The client can then send questions to the server using the "ask a question" operation and the server responds with “true” or “false”. For example, if the client asks "is it less than 7", the server should respond with "false" (for the solution 42). After asking a series of questions, the client can use the “guess an answer” operation to attempt to win the game. The server responds with “you won!” or “you lost!” and ends the game.
+
+Assumptions and Constraints
+
+The client will be used by a human. It can either be a command line utility, an interactive prompt, or anything else that lets the user submit questions and guesses . You can have a static and shared set of allowable questions. Examples of good questions to support are:
+
+* < X? 
+* > X?
+* Even?
+* Odd?
+
+Feel free to add others, but the supported questions and their format should be documented.
+
+Supporting multiple concurrent games would be logical but isn’t strictly required.
+
+Deliverables
+
+Send us a tarball containing your code and a README with directions on how to build and run your guessing game. If you include tests, we will give those a try too. Add a Dockerfile if that would make it easier to build and run your game.
