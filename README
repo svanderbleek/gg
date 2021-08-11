@@ -31,5 +31,12 @@ Send us a tarball containing your code and a README with directions on how to bu
 
 Directions
 
+You will need sqlite and go. Sqlite comes with OSX and go can be installed from golang.org.
 
+The server is run with a namespace for the database which will be stored in a local file:
 
+go run server.go gg
+
+The client is an interactive prompt run with:
+
+go run client.go
