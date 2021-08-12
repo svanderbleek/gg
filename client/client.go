@@ -12,22 +12,26 @@ func Game(client Client, actions, ask, guess) {
   client.Start()
 
   _, action, err := actions.Run()
-  log.Println(err)
+  if err {
+    log.Println(err)
+  }
 
   if(action == "Ask") {
     query, err := ask.Run()
-    log.Println(err)
+    if err {
+      log.Println(err)
+    }
 
     client.Ask(query)
 
     Game(client, actions, ask, guess)
   } else {
-    answer, err := guess.Run()
-    log.Println(err)
+    solution, err := guess.Run()
+    if err {
+      log.Println(err)
+    }
 
-    client.Guess(answer)
-
-    if(client.Won) {
+    if(client.Guess(solution)) {
       fmt.Println("you won!")
     } else {
       fmt.Println("you lost!")
@@ -37,28 +41,51 @@ func Game(client Client, actions, ask, guess) {
 
 type Client struct {
   id string
-  Won bool
   client *http.Client
 }
 
 func (c *Client) Start() {
   response, err := c.client.Do(http.NewRequest("POST", "/start", nil);
-  log.Println(err)
+  if err {
+    log.Println(err)
+  }
 
   id, err := strconv.ParseInt(string(response.Body), 10, 64)
-  log.Println(err)
+  if err {
+    log.Println(err)
+  }
 
   c.id = id 
 }
 
 func (c *Client) Ask(query string) {
-  response, err := c.client.Do(http.NewRequest("GET", "/ask?query=" + query, nil);
-  log.Println(err)
+  path := "/ask?id=" + c.id + "&query=" + query
+  response, err := c.client.Do(http.NewRequest("GET", path, nil);
+  if err {
+    log.Println(err)
+  }
+
+  result, err := strconv.ParseBool(string(response.Body))
+  if err {
+    log.Println(err)
+  }
+
+  return result
 }
 
-func (c *Client) Guess(answer string) {
-  response, err := c.client.Do(http.NewRequest("POST", "/guess", strings.NewReader("answer=" + answer));
-  log.Println(err)
+func (c *Client) Guess(solution string) {
+  body := strings.NewReader("id=" + c.id + "&solution=" + solution)
+  response, err := c.client.Do(http.NewRequest("POST", "/guess", );
+  if err {
+    log.Println(err)
+  }
+
+  result, err := strconv.ParseBool(string(response.Body))
+  if err {
+    log.Println(err)
+  }
+
+  return result
 }
 
 func main() {
@@ -85,7 +112,9 @@ func main() {
   }
 
   _, _, err := start.Run()
-  log.Println(err)
+  if err {
+    log.Println(err)
+  }
 
   game(client, actions, ask, guess)
 }
