@@ -23,6 +23,10 @@ func TestMain(m *testing.M) {
 
 func TestStart(t *testing.T) {
   request, err := http.NewRequest("POST", "/start", nil)
+  if(err != nil) {
+    t.Error(err)
+  }
+
   recorder := httptest.NewRecorder()
 
   handler := SetupGuessingGame(namespace)
@@ -31,11 +35,14 @@ func TestStart(t *testing.T) {
   response := recorder.Result()
 
   body, err := io.ReadAll(response.Body)
-  id, err := strconv.ParseInt(string(body), 10, 64)
-
   if(err != nil) {
     t.Error(err)
-  } else {
-    t.Log(id)
   }
+
+  id, err := strconv.ParseInt(string(body), 10, 64)
+  if(err != nil) {
+    t.Error(err)
+  } 
+
+  t.Log(id)
 }

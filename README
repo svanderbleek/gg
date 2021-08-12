@@ -40,3 +40,10 @@ go run server.go gg
 The client is an interactive prompt run with:
 
 go run client.go
+
+questions are:
+
+* is it less than X
+* is it more than X
+* is it odd
+* is it even

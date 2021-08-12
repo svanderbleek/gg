@@ -40,7 +40,7 @@ func ask(w http.ResponseWriter, r *http.Request) {
 }
 
 func guess(w http.ResponseWriter, r *http.Request) {
-  guess := r.FormValue("guess")
+  answer := r.FormValue("answer")
   log.Println(guess)
 }
 
