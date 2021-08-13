@@ -4,11 +4,11 @@ You will need sqlite and go. Sqlite comes with OSX and go can be installed from 
 
 The server is run with a namespace for the database which will be stored in a local file:
 
-go run server.go gg
+go run server/server.go gg
 
 The client is an interactive prompt run with:
 
-go run client.go
+go run client/client.go
 
 Solution is in range 1, 100. Questions are as follows and must be exact otherwise it is a 400, they were simplified due to lack of time to handle spaces
 
